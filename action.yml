@@ -3,7 +3,7 @@ description: 'Configures local openssh with provided host and credentials'
 
 inputs:
   server-name:
-    description: "Local server name reference: use ie"
+    description: "Local server name reference: use identifier-like name only"
     required: true
     default: "remote"
   host:
