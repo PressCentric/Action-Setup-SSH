@@ -24,6 +24,7 @@ runs:
   using: "composite"
   steps:
     - run: |
+        echo Test - Started
         mkdir -p ~/.ssh
         echo ${{ inputs.private-key }} > ~/.ssh/${{ inputs.host }}.key
         chmod 600 ~/.ssh/${{ inputs.host }}.key
