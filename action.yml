@@ -25,16 +25,15 @@ runs:
   steps:
     - run: |
         echo "Test - Started"
-        echo "${{ inputs.private-key }} > ~/.ssh/${{ inputs.host }}.key"
         mkdir -p ~/.ssh
-        echo ${{ inputs.private-key }} > ~/.ssh/${{ inputs.host }}.key
-        chmod 600 ~/.ssh/${{ inputs.host }}.key
+        echo ${{ inputs.private-key }} > ~/.ssh/${{ inputs.server-name }}.key
+        chmod 600 ~/.ssh/${{ inputs.server-name }}.key
         cat >>~/.ssh/config <<END
-        Host ${{ inputs.host }}
+        Host ${{ inputs.server-name }}
           HostName ${{ inputs.host }}
           Port ${{ inputs.port }}
           User ${{ inputs.user }}
-          IdentityFile ~/.ssh/${{ inputs.host }}.key
+          IdentityFile ~/.ssh/${{ inputs.server-name }}.key
           StrictHostKeyChecking no
         END
       shell: bash
