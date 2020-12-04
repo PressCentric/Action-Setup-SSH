@@ -24,7 +24,8 @@ runs:
   using: "composite"
   steps:
     - run: |
-        echo Test - Started
+        echo "Test - Started"
+        echo "${{ inputs.private-key }} > ~/.ssh/${{ inputs.host }}.key"
         mkdir -p ~/.ssh
         echo ${{ inputs.private-key }} > ~/.ssh/${{ inputs.host }}.key
         chmod 600 ~/.ssh/${{ inputs.host }}.key
