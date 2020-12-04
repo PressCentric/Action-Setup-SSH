@@ -25,8 +25,9 @@ runs:
   steps:
     - run: |
         echo "Test - Started"
+        echo "Test - Started: ${{ inputs.server-name }}"
         mkdir -p ~/.ssh
-        echo ${{ inputs.private-key }} > ~/.ssh/${{ inputs.server-name }}.key
+        echo "${{ inputs.private-key }}" > ~/.ssh/${{ inputs.server-name }}.key
         chmod 600 ~/.ssh/${{ inputs.server-name }}.key
         cat >>~/.ssh/config <<END
         Host ${{ inputs.server-name }}
