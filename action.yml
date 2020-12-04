@@ -1,0 +1,39 @@
+name: 'Setup SSH'
+description: 'Configures local openssh with provided host and credentials'
+
+inputs:
+  server-name:
+    description: "Local server name reference: use ie"
+    required: true
+    default: "remote"
+  host:
+    description: "SSH server host"
+    required: true
+  port:
+    description: "SSH port"
+    required: false
+    default: "22"
+  user:
+    description: "SSH user name"
+    required: true
+  private-key:
+    description: "SSH private key"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        mkdir -p ~/.ssh
+        echo ${{ inputs.private-key }} > ~/.ssh/${{ inputs.host }}.key
+        chmod 600 ~/.ssh/${{ inputs.host }}.key
+        cat >>~/.ssh/config <<END
+        Host ${{ inputs.host }}
+          HostName ${{ inputs.host }}
+          Port ${{ inputs.port }}
+          User ${{ inputs.user }}
+          IdentityFile ~/.ssh/${{ inputs.host }}.key
+          StrictHostKeyChecking no
+        END
+      shell: bash
+
